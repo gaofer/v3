@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <a-button @click="clickBtn">点击</a-button>
-    <neu-button primary>测试</neu-button>
+    <neu-button :onClick="clickBtn">测试</neu-button>
   </div>
 </template>
 
