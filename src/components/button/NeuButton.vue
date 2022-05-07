@@ -1,5 +1,5 @@
 <template>
-  <div id="neuBtn">
+  <div ref="Neubutton" id="neuBtn">
     <div class="btn" :class="primary ? 'btn_primary' : 'btn_secondary'" @click="onClick">
       <p><slot></slot></p>
     </div>
@@ -19,6 +19,19 @@ export default defineComponent({
       type: Function,
       default: () => {},
     },
+    size: {
+      type: String,
+      default: "medium",
+    }
+  },
+  mounted() {
+    if (this.size === "small") {
+      this.$refs.Neubutton.classList.add("button_small");
+    }else if (this.size === "large") {
+      this.$refs.Neubutton.classList.add("button_large");
+    }else {
+      this.$refs.Neubutton.classList.add("button_medium");
+    }
   },
 });
 </script>
@@ -26,8 +39,17 @@ export default defineComponent({
 <style lang="less" scoped>
 @import "../../style/common.less";
 
-#neuBtn {
+.button_small{
+  transform: scale(50%);
+}
+.button_large{
+  transform: scale(100%);
+}
+.button_medium{
   transform: scale(62.5%);
+}
+
+#neuBtn {
   display: inline-block;
   font-family: "Poppins", sans-serif;
   .btn {
