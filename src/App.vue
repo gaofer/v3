@@ -14,7 +14,7 @@
       <a-layout style="height: 100%">
         <a-layout-sider width="200" class="layout-sider" style="background: #fff; height: 100%; overflow: scroll">
           <a-menu
-              v-model:selectedKeys="selectedKeys"
+              v-model:selectedKeys="formKeylist"
               mode="inline"
               :style="{ height: '100%', borderRight: 0 }"
               @click="clickMenu"
@@ -24,6 +24,7 @@
         </a-layout-sider>
         <a-layout style="padding: 20px">
           <a-layout-content
+              id="layout-content"
               :style="{ padding: '24px', margin: 0, minHeight: '280px' }"
           >
             <router-view />
@@ -50,7 +51,8 @@ export default {
   },
   computed: {
     ...mapState({
-      formKey: state => state.formKey
+      formKey: state => state.formKey,
+      formKeylist: state => state.formKeylist
     }),
   },
   mounted() {
@@ -58,8 +60,13 @@ export default {
   },
   methods: {
     clickMenu(item) {
+      this.$router.push({
+        path: `/`
+      });
       this.$store.commit('changeFormKey', item.key);
       this.$store.commit('changeFormName', item.item.name);
+      let dom =document.getElementById('layout-content');
+      dom.scrollTop = 0;
     },
     getFormList() {
       let params = {
@@ -71,7 +78,7 @@ export default {
           this.navList.sort((a, b) => {
             return a.sort - b.sort;
           });
-          this.selectedKeys.push(this.navList[0].id);
+          // this.selectedKeys.push(this.navList[0].id);
           this.$store.commit('changeFormKey', this.navList[0].key);
           this.$store.commit('changeFormListInfo', this.navList);
           this.$store.commit('changeFormName', this.navList[0].name);
