@@ -1,11 +1,24 @@
 <template>
   <div id="singlePost">
     <div class="post-title-content">
-      <neu-button style="position: absolute; right: -25px; top: -10px;" size="small" :onClick="()=>{}">{{ forumName }}
+      <neu-button style="position: absolute; right: -25px; top: -10px;" size="small"
+                  :onClick="()=>{
+                    this.$store.commit('changeFormKey', this.data.forum);
+                    this.$store.commit('changeFormName', this.forumName);
+                  }">
+        {{ forumName }}
       </neu-button>
       <div class="content-cookie">{{ data.cookie }}</div>
       <div class="content-postTime">{{ postTime(data.time) }}</div>
-      <div class="content-id">#{{ data.id }}</div>
+      <div class="content-id canClick"
+           @click="()=>{
+             this.$router.push({
+              path: `/viewSinglePost/${data.id}`
+              });
+           }"
+      >
+        #{{ data.id }}
+      </div>
     </div>
     <div class="main-content" v-html="data.content"></div>
     <div v-if="data.images!=null" class="item-content-img">
@@ -17,6 +30,7 @@
     
     <div class="reply" v-for="item in data.reply" :key="item.id">
       <div class="post-title-content">
+        <div v-if="item.cookie==data.cookie" class="oring-poster"></div>
         <div class="content-cookie">{{ item.cookie }}</div>
         <div class="content-postTime">{{ postTime(item.time) }}</div>
         <div class="content-id">#{{ item.id }}</div>
@@ -61,12 +75,6 @@ export default {
     }
   },
   methods: {
-    timestampToTime(timestamp) {
-      console.log(timestamp);
-      let date = new Date(timestamp);
-      return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-      
-    },
     getName(id) {
       let name = "";
       this.formListInfo.forEach(item => {
@@ -133,6 +141,7 @@ export default {
   
   .main-content {
     padding: 10px;
+    
   }
   
   .reply {
@@ -140,5 +149,29 @@ export default {
     border-radius: 5px;
     margin-bottom: 15px;
   }
+  
+  .oring-poster:after {
+    margin: 8px;
+    padding: 0 5px;
+    background-color: #94E6FF;
+    content: "po";
+    border-radius: 3px;
+  }
+  .canClick{
+    cursor: pointer;
+    color: #8abdff;
+  }
+}
+</style>
+<style scoped>
+/deep/ .quote{
+  background: #f4f4f4;;
+  color: #fb7299;
+  border-radius: 0.04rem;
+  /*cursor: pointer;*/
+  font-size: 0.12rem;
+  font-weight: 700;
+  padding: 0.02rem 0.05rem;
+  z-index: 1;
 }
 </style>
