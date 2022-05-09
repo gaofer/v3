@@ -8,7 +8,7 @@
         <div class="logo">
           <img src="http://bog-ac-static.smartgslb.com/static/header/timeline.png" alt="">
 <!--         todo 搜索功能 -->
-          <neu-search></neu-search>
+<!--          <neu-search></neu-search>-->
         </div>
       </a-layout-header>
       <a-layout style="height: 100%">
@@ -36,12 +36,12 @@
 </template>
 <script>
 import {getFBData} from "@/api/common";
-import NeuSearch from "@/components/search/NeuSearch";
+// import NeuSearch from "@/components/search/NeuSearch";
 import { mapState } from 'vuex'
 
 export default {
   components: {
-    NeuSearch
+    // NeuSearch
   },
   data() {
     return {

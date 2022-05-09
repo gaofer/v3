@@ -15,7 +15,10 @@
     <div class="main-content" v-html="data.content"></div>
     <div v-if="data.images!=null" class="item-content-img">
       <div style="width: 200px;height: 200px;" v-for="img in data.images" :key="img.url">
-        <img class="content-img" :src="'http://bog-ac-static.smartgslb.com/image/thumb/'+img.url+img.ext" alt="">
+        <a-image-preview-group>
+        <a-image  :width="200"
+                  :height="200" :src="'http://bog-ac-static.smartgslb.com/image/large/'+img.url+img.ext" />
+        </a-image-preview-group>
       </div>
     
     </div>
@@ -30,7 +33,10 @@
       <div class="main-content" v-html="item.content"></div>
       <div v-if="item.images!=null" class="item-content-img">
         <div style="width: 200px;height: 200px;" v-for="img in item.images" :key="img.url">
-          <img class="content-img" :src="'http://bog-ac-static.smartgslb.com/image/thumb/'+img.url+img.ext" alt="">
+          <a-image-preview-group>
+          <a-image  :width="200"
+                    :height="200" :src="'http://bog-ac-static.smartgslb.com/image/large/'+img.url+img.ext" alt="" />
+          </a-image-preview-group>
         </div>
       </div>
     </div>

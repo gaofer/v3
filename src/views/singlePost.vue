@@ -23,7 +23,10 @@
     <div class="main-content" v-html="data.content"></div>
     <div v-if="data.images!=null" class="item-content-img">
       <div style="width: 200px;height: 200px;" v-for="img in data.images" :key="img.url">
-        <img class="content-img" :src="'http://bog-ac-static.smartgslb.com/image/thumb/'+img.url+img.ext" alt="">
+        <a-image-preview-group>
+        <a-image  :width="200"
+                  :height="200" :src="'http://bog-ac-static.smartgslb.com/image/large/'+img.url+img.ext" alt="" />
+        </a-image-preview-group>
       </div>
     
     </div>
@@ -38,10 +41,21 @@
       <div class="main-content" v-html="item.content"></div>
       <div v-if="item.images!=null" class="item-content-img">
         <div style="width: 200px;height: 200px;" v-for="img in item.images" :key="img.url">
-          <img class="content-img" :src="'http://bog-ac-static.smartgslb.com/image/thumb/'+img.url+img.ext" alt="">
+          <a-image-preview-group>
+          <a-image  :width="200"
+                    :height="200" :src="'http://bog-ac-static.smartgslb.com/image/large/'+img.url+img.ext" alt="" />
+          </a-image-preview-group>
         </div>
       </div>
     </div>
+    <div v-if="data.hide_count!=0" class="quote" @click="()=>{
+             this.$router.push({
+              path: `/viewSinglePost/${data.id}`
+              });
+           }"
+         style="cursor: pointer; background-color: #fff; text-align: center;"
+    >
+      &gt;&gt;还有{{data.hide_count}}条评论，点击查看&lt;&lt; </div>
   </div>
 </template>
 
@@ -52,7 +66,7 @@ import NeuButton from "@/components/button/NeuButton";
 export default {
   name: "singlePost",
   components: {
-    NeuButton
+    NeuButton,
   },
   props: {
     data: {
@@ -100,12 +114,12 @@ export default {
     display: grid;
     grid-template-columns: repeat(3, 200px);
     grid-template-rows: repeat(auto-fit, 200px);
-    
-    img {
-      width: 98%;
-      height: 98%;
-      margin: 1%;
-      object-fit: cover;
+  
+    /deep/ .ant-image-img {
+      width: 98% !important;
+      height: 98% !important;
+      margin: 1% !important;
+      object-fit: cover !important;
     }
   }
   
@@ -165,7 +179,7 @@ export default {
 </style>
 <style scoped>
 /deep/ .quote{
-  background: #f4f4f4;;
+  background: #f4f4f4;
   color: #fb7299;
   border-radius: 0.04rem;
   /*cursor: pointer;*/
