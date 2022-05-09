@@ -31,6 +31,9 @@ export default {
       this.getForm(val);
     }
   },
+  mounted() {
+    this.getForm(this.formKey);
+  },
   methods: {
     getForm(formKey, page = 1) {
       let params = {
@@ -40,7 +43,6 @@ export default {
       }
       getFBData(params).then(res => {
         if (res.code == 6001) {
-          console.log(res.info);
           this.postList = res.info;
         }
       });
