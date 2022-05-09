@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 // import HomeView from '../views/HomeView.vue'
 
 const routes = [
@@ -21,7 +21,13 @@ const routes = [
     path: '/formDetail',
     name: 'formDetail',
     component: () => import('../views/FormDetailView.vue')
+  },
+  {
+    path: '/viewSinglePost/:id',
+    name: 'ViewSinglePost',
+    component: () => import('../views/ViewSinglePost.vue')
   }
+
 ]
 
 const router = createRouter({
