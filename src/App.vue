@@ -3,7 +3,7 @@
     <router-view />
   </div>-->
   <div id="app">
-    <a-layout style="height: 100%">
+    <a-layout style="height: 100%; max-width: 1500px">
       <a-layout-header class="header">
         <div class="logo">
           <img src="http://bog-ac-static.smartgslb.com/static/header/timeline.png" alt="">
@@ -113,6 +113,12 @@ nav a.router-link-exact-active {
 }
 </style>
 <style lang="less" scoped>
+#app {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .logo {
   display: flex;
   width: 70px;
